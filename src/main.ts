@@ -82,13 +82,27 @@ const state: State = {
   ),
 };
 
+function drawUnsolvedTile(tile: Tile) {
+  return `<button class="unsolved">${tile.word}</button>`;
+}
+
+function drawRow(row: TileRow) {
+  if (row.solvedDifficulty !== null) {
+    return `<div class="row">${row.tiles
+      .map((tile) => tile.word)
+      .join("")}</div>`;
+  } else {
+    return `<div class="row">${row.tiles.map(drawUnsolvedTile).join("")}</div>`;
+  }
+}
+
 function drawState(state: State) {
   return `
-    <div>
+    <div class="grid">
       ${state.tiles
         .map(
           (row) => `
-        <div>${row.tiles.map((tile) => tile.word).join(" ")}</div>
+        ${drawRow(row)}
       `
         )
         .join("")}
@@ -96,6 +110,6 @@ function drawState(state: State) {
   `;
 }
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  ${drawState(state)}
-`;
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `${drawState(
+  state
+)}`;
