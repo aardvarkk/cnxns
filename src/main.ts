@@ -71,6 +71,7 @@ function shuffleUnsolved(tiles: TileGrid): TileGrid {
 
 type State = {
   tiles: TileGrid;
+  selectedTiles: Tile[];
 };
 
 const state: State = {
@@ -80,6 +81,7 @@ const state: State = {
       solvedDifficulty: null,
     }))
   ),
+  selectedTiles: [],
 };
 
 function drawSolvedRow(tileRow: TileRow) {
@@ -89,12 +91,23 @@ function drawSolvedRow(tileRow: TileRow) {
   return row;
 }
 
+function toggleTileSelected(tile: Tile) {
+  if (state.selectedTiles.includes(tile)) {
+    document.getElementById(tile.word)!.classList.remove("selected");
+    state.selectedTiles = state.selectedTiles.filter((t) => t !== tile);
+  } else if (state.selectedTiles.length < TILES_PER_ROW) {
+    document.getElementById(tile.word)!.classList.add("selected");
+    state.selectedTiles = [...state.selectedTiles, tile];
+  }
+}
+
 function drawUnsolvedTile(tile: Tile) {
   const button = document.createElement("button");
+  button.id = tile.word;
   button.classList.add("unsolved");
   button.textContent = tile.word;
   button.addEventListener("click", () => {
-    button.classList.add("selected");
+    toggleTileSelected(tile);
   });
   return button;
 }
