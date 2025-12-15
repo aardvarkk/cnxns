@@ -1,5 +1,11 @@
 :root {
+  font-family: sans-serif;
   font-size: 3vmin;
+
+  --yellow: #f5e07e;
+  --green: #a7c268;
+  --blue: #b4c3eb;
+  --purple: #b283c1;
 }
 
 button {
@@ -12,12 +18,25 @@ button.selected {
   color: #ffffff;
 }
 
+.button-row {
+  display: flex;
+  gap: 2vmin;
+}
+
+.button-row button {
+  border: 1px solid darkgray;
+  border-radius: 4vmin;
+  padding: 1vmin 2vmin;
+}
+
 #app {
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2vmin;
 }
 
 .grid {
@@ -31,7 +50,31 @@ button.selected {
   gap: 2vmin;
 }
 
+.tile {
+  border: 1px solid darkgray;
+  border-radius: 2vmin;
+}
+
 .unsolved {
   width: 20vmin;
   height: 20vmin;
+}
+
+.solved-row {
+  width: 86vmin;
+  height: 20vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2vmin;
+  border: 0px;
+
+  .name {
+    font-weight: bold;
+  }
+
+  .words {
+    font-style: italic;
+  }
 }
