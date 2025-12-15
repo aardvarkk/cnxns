@@ -82,34 +82,44 @@ const state: State = {
   ),
 };
 
-function drawUnsolvedTile(tile: Tile) {
-  return `<button class="unsolved">${tile.word}</button>`;
+function drawSolvedRow(tileRow: TileRow) {
+  const row = document.createElement("div");
+  row.classList.add("row");
+  row.textContent = tileRow.tiles.map((tile) => tile.word).join("");
+  return row;
 }
 
-function drawRow(row: TileRow) {
-  if (row.solvedDifficulty !== null) {
-    return `<div class="row">${row.tiles
-      .map((tile) => tile.word)
-      .join("")}</div>`;
+function drawUnsolvedTile(tile: Tile) {
+  const button = document.createElement("button");
+  button.classList.add("unsolved");
+  button.textContent = tile.word;
+  button.addEventListener("click", () => {
+    button.classList.add("selected");
+  });
+  return button;
+}
+
+function drawRow(tileRow: TileRow) {
+  if (tileRow.solvedDifficulty !== null) {
+    return drawSolvedRow(tileRow);
   } else {
-    return `<div class="row">${row.tiles.map(drawUnsolvedTile).join("")}</div>`;
+    const row = document.createElement("div");
+    row.classList.add("row");
+    tileRow.tiles.forEach((tile) => {
+      row.appendChild(drawUnsolvedTile(tile));
+    });
+    return row;
   }
 }
 
 function drawState(state: State) {
-  return `
-    <div class="grid">
-      ${state.tiles
-        .map(
-          (row) => `
-        ${drawRow(row)}
-      `
-        )
-        .join("")}
-    </div>
-  `;
+  const grid = document.createElement("div");
+  grid.classList.add("grid");
+  state.tiles.forEach((tileRow) => {
+    grid.appendChild(drawRow(tileRow));
+  });
+  return grid;
 }
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `${drawState(
-  state
-)}`;
+const app = document.querySelector<HTMLDivElement>("#app")!;
+app.replaceChildren(drawState(state));
