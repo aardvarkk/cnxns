@@ -1,7 +1,8 @@
 import "./style.css";
 
 const TILES_PER_ROW = 4;
-const WAIT_PER_FAILURE = 2000;
+// const WAIT_PER_FAILURE = 2000;
+const WAIT_PER_FAILURE = 120_000;
 
 const Difficulty = {
   YELLOW: "yellow",
