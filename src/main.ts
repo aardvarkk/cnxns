@@ -249,8 +249,19 @@ function drawButtons(state: State) {
 function redraw() {
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
+  function winText(line: string): HTMLDivElement {
+    const div = document.createElement("div");
+    div.classList.add("win-text");
+    div.textContent = line;
+    return div;
+  }
+
   if (state.won) {
-    app.textContent = "You did it! Merry Christmas, Lanclarksters!";
+    app.replaceChildren(
+      winText("You did it!"),
+      winText("Merry Christmas, Lanclarksters!"),
+      winText("Lots of love from all of us out west.")
+    );
   } else {
     const grid = drawGrid(state);
     const buttons = drawButtons(state);

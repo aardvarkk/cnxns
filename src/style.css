@@ -6,6 +6,13 @@
   --green: #a7c268;
   --blue: #b4c3eb;
   --purple: #b283c1;
+
+  --cgreen: #325632;
+  --cred: #8b181d;
+}
+
+html {
+  background-color: var(--cgreen);
 }
 
 button {
@@ -24,7 +31,7 @@ button.selected {
 }
 
 .button-row button {
-  border: 1px solid darkgray;
+  border: 2px solid var(--cred);
   border-radius: 4vmin;
   padding: 1vmin 2vmin;
 }
@@ -51,7 +58,7 @@ button.selected {
 }
 
 .tile {
-  border: 1px solid darkgray;
+  border: 2px solid var(--cred);
   border-radius: 2vmin;
 }
 
@@ -77,4 +84,10 @@ button.selected {
   .words {
     font-style: italic;
   }
+}
+
+.win-text {
+  font-size: 6vmin;
+  font-weight: 500;
+  color: white;
 }
